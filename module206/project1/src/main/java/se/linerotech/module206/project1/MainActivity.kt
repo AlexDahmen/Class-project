@@ -1,7 +1,6 @@
 package se.linerotech.module206.project1
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -10,7 +9,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import se.linerotech.module206.project1.common.CountryData
 import se.linerotech.module206.project1.databinding.ActivityMainBinding
@@ -29,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private fun observerState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.state.collect() {
+                viewModel.state.collect {
                     when (it) {
                         CountryUIState.Loading -> showProgressBar()
                         is CountryUIState.Loaded -> showCountry(it.countries)
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showErrorMessage() {
-        Toast.makeText(this, "unable to retrieve", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.unable_to_retrieve), Toast.LENGTH_LONG).show()
     }
 
     private fun showCountry(countries: List<CountryData>) {
