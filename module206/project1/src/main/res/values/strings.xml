@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">Module 206 - Project 1</string>
     <string name="unable_to_retrieve">Unable to retrieve</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="show_countries">Show Countries</string>
+    <string name="worst_api_known_to_man">WORST API KNOWN TO MAN</string>
 </resources>

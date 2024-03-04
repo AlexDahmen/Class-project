@@ -39,7 +39,7 @@ class CountryViewModel : ViewModel() {
             CountryData(
                 it.name.common,
                 it.languages?.toList()?.first()?.second?:"",
-                it.flags.png
+                it.flags.png,
             )
         }.sortedBy{it.country.first()}
     }
