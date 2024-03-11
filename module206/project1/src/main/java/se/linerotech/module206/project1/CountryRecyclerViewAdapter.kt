@@ -8,7 +8,8 @@ import se.linerotech.module206.project1.common.CountryData
 import se.linerotech.module206.project1.databinding.LayoutCellBinding
 
 class CountryRecyclerViewAdapter (
-    private val items: List<CountryData>
+    private val items: List<CountryData>,
+    private val onCellClicked: () -> Unit
 ): RecyclerView.Adapter<CountryRecyclerViewAdapter.CountryViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
