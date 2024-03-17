@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHomework">
         <activity
-            android:name=".CountryListActivity"
+            android:name=".country.CountryListActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

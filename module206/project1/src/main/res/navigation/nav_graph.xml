@@ -6,7 +6,26 @@
 
     <fragment
         android:id="@+id/countryListFragment"
-        android:name="se.linerotech.module206.project1.CountryListFragment"
-        android:label="Country List"/>
+        android:name="se.linerotech.module206.project1.country.CountryListFragment"
+        android:label="Country List">
+
+        <action
+            android:id="@+id/countryDetailsAction"
+            app:destination="@id/countryDetailsFragment">
+            <argument
+                android:name="country"
+                app:argType="se.linerotech.module206.project1.common.CountryData"/>
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/countryDetailsFragment"
+        android:name="se.linerotech.module206.project1.countryDetails.CountryDetailsFragment"
+        android:label="Country Details">
+
+        <argument
+            android:name="country"
+            app:argType="se.linerotech.module206.project1.common.CountryData"/>
+    </fragment>
 
 </navigation>
