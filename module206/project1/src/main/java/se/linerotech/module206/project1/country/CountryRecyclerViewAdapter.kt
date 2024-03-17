@@ -1,4 +1,4 @@
-package se.linerotech.module206.project1
+package se.linerotech.module206.project1.country
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,13 +9,13 @@ import se.linerotech.module206.project1.databinding.LayoutCellBinding
 
 class CountryRecyclerViewAdapter (
     private val items: List<CountryData>,
-    private val onCellClicked: () -> Unit
+    private val onCellClicked: (CountryData) -> Unit
 ): RecyclerView.Adapter<CountryRecyclerViewAdapter.CountryViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): CountryViewHolder {
-        return CountryViewHolder.create(parent)
+        return CountryViewHolder.create(parent, onCellClicked)
     }
 
     override fun onBindViewHolder(
@@ -31,12 +31,14 @@ class CountryRecyclerViewAdapter (
     }
 
     class CountryViewHolder (
-        private val binding: LayoutCellBinding
+        private val binding: LayoutCellBinding,
+        private val onCellClicked: (CountryData) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(country: CountryData) {
             binding.countryName.text = country.country
             binding.language.text = country.language
             loadImage(country.flagUrl)
+            binding.countryCell.setOnClickListener { onCellClicked(country) }
         }
         private fun loadImage(url: String) {
             Glide
@@ -46,12 +48,12 @@ class CountryRecyclerViewAdapter (
                 .into(binding.imgFlag)
         }
         companion object {
-            fun create(parent: ViewGroup): CountryViewHolder {
+            fun create(parent: ViewGroup, onCellClicked: (CountryData) -> Unit): CountryViewHolder {
                 val binding =
                     LayoutCellBinding
                         .inflate(LayoutInflater.from(parent.context), parent, false)
 
-                return CountryViewHolder(binding)
+                return CountryViewHolder(binding, onCellClicked)
             }
         }
     }

@@ -1,4 +1,4 @@
-package se.linerotech.module206.project1
+package se.linerotech.module206.project1.country
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import se.linerotech.module206.project1.common.CountryData
@@ -51,10 +52,15 @@ class CountryListFragment : Fragment() {
     private fun showCountry(countries: List<CountryData>) {
         binding.recyclerView.apply {
             visibility = View.VISIBLE
-            adapter = CountryRecyclerViewAdapter(countries)
+            adapter = CountryRecyclerViewAdapter(countries, onCellClicked = ::showCountryDetails)
             layoutManager =
                 LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
         }
+    }
+
+    private fun showCountryDetails(countryData: CountryData) {
+        val action = CountryListFragmentDirections.countryDetailsAction(countryData)
+        findNavController().navigate(action)
     }
 }

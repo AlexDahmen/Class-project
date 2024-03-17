@@ -1,4 +1,4 @@
-package se.linerotech.module206.project1
+package se.linerotech.module206.project1.country
 
 import se.linerotech.module206.project1.common.CountryData
 

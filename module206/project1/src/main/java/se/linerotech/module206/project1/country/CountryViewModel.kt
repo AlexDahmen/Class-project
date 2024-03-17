@@ -1,4 +1,4 @@
-package se.linerotech.module206.project1
+package se.linerotech.module206.project1.country
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -40,6 +40,8 @@ class CountryViewModel : ViewModel() {
                 it.name.common,
                 it.languages?.toList()?.first()?.second?:"",
                 it.flags.png,
+                it.region,
+                it.population.toString()
             )
         }.sortedBy{it.country.first()}
     }
