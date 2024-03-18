@@ -10,17 +10,20 @@ import kotlinx.coroutines.launch
 import se.linerotech.module206.project1.common.CountryData
 import se.linerotech.module206.project1.dto.CountryDTOItem
 import se.linerotech.module206.project1.network.RetrofitClient
-
+enum class SortBy{
+    Language,
+    Country
+}
 class CountryViewModel : ViewModel() {
     private val _state = MutableStateFlow<CountryUIState>(CountryUIState.Loading)
     val state: StateFlow<CountryUIState> = _state
 
     init {
-        Log.d("P123"," CALLING INIT")
+        Log.d("P123", " CALLING INIT")
         getAllCountry()
     }
 
-    private fun getAllCountry() {
+    fun getAllCountry() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = RetrofitClient.countryApiService.all()
@@ -34,15 +37,19 @@ class CountryViewModel : ViewModel() {
         }
     }
 
-    private fun convertToCountryData(result: List<CountryDTOItem>): List<CountryData>{
-        return result.map {
-            CountryData(
-                it.name.common,
-                it.languages?.toList()?.first()?.second?:"",
-                it.flags.png,
-                it.region,
-                it.population.toString()
-            )
-        }.sortedBy{it.country.first()}
+    private fun convertToCountryData(result: List<CountryDTOItem>): List<CountryData> {
+        return result
+            .map {
+                CountryData(
+                    it.name.common,
+                    it.languages?.toList()?.first()?.second ?: "",
+                    it.flags.png,
+                    it.region,
+                    it.population.toString()
+                )
+            }
+            .sortedBy { it.language }
+            .distinctBy { it.language }
+            .filter { it.language.trim().isNotEmpty() }
     }
 }

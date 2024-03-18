@@ -28,4 +28,18 @@
             app:argType="se.linerotech.module206.project1.common.CountryData"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/languageListFragment"
+        android:name="se.linerotech.module206.project1.LanguageListFragment"
+        android:label="Languages">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/populationListFragment"
+        android:name="se.linerotech.module206.project1.PopulationListFragment"
+        android:label="Population List">
+
+    </fragment>
+
 </navigation>
